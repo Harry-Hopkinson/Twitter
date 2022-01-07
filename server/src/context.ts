@@ -1,15 +1,16 @@
 import { PrismaClient } from '@prisma/client'
+import { ContextParameters } from 'graphql-yoga/dist/types'
 
 const prisma = new PrismaClient()
 
 export interface Context {
   prisma: PrismaClient
-  req: any // HTTP request carrying the `Authorization` header
+  request: any
 }
 
-export function createContext(req: any) {
+export function createContext(request: ContextParameters) {
   return {
-    ...req,
+    ...request,
     prisma,
   }
 }
